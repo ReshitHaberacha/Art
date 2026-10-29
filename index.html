@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="site-title"> ראשית הברכה | כיפות סרוגות & אמנות בעץ זית </title>
+    <!-- Favicon / אייקון דפדפן -->
+    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/d/13eZ5cv1sqxYB3-4j_OURBUBXMYd4XyKo">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Amatic SC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vintage: {
+                            50: '#fdfbf7', 100: '#f7f1e5', 200: '#ebd9c1', 300: '#dbba96',
+                            400: '#c6956b', 500: '#b47849', 600: '#9a5c37', 700: '#7e452e',
+                            800: '#67392a', 900: '#543025',
+                        },
+                        olive: {
+                            50: '#f4f7f4', 100: '#e3eae3', 200: '#c5d5c5', 300: '#a5c0a5',
+                            500: '#6b8e62', 600: '#58745e', 700: '#435a48', 800: '#384d3d', 900: '#26362a'
+                        },
+                        cream: '#fcf8f2',
+                        whatsapp: '#25D366'
+                    },
+                    fontFamily: {
+                        handwriting: ['"Amatic SC"', 'cursive', 'sans-serif'],
+                        serif: ['"Amatic SC"', 'cursive', 'sans-serif'],
+                        sans: ['"Amatic SC"', 'cursive', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Amatic SC', cursive, sans-serif;
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#ebd9c1 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        .vintage-shadow { box-shadow: 6px 6px 0px 0px rgba(126, 69, 46, 0.15); }
+        .stitched-border { border: 2px dashed #b47849; }
+        .stitched-border-olive { border: 2px dashed #58745e; }
+        h1, h2, h3, h4, .text-font-large { font-weight: 700; }
+        select, input, button, textarea {
+            font-family: 'Amatic SC', cursive, sans-serif !important;
+            font-size: 1.4rem !important;
+            font-weight: 700;
+        }
+        .toggle-btn-left { border-radius: 0 0.75rem 0.75rem 0; }
+        .toggle-btn-right { border-radius: 0.75rem 0 0 0.75rem; }
+        .toggle-btn.active-crochet { background-color: #b47849; color: #ffffff; border-color: #7e452e; }
+        .toggle-btn.active-wood { background-color: #58745e; color: #ffffff; border-color: #384d3d; }
+        
+        /* התאמת גוון הלוגו לפלטת הווינטג' החמה של האתר */
+        .kippah-icon-style {
+            filter: sepia(0.8) hue-rotate(-15deg) saturate(2.5) brightness(0.75);
+            transition: filter 0.3s ease;
+        }
+        .toggle-btn.active-crochet .kippah-icon-style {
+            filter: brightness(0) invert(1);
+        }
+    </style>
+</head>
+<body class="text-vintage-900 font-handwriting min-h-screen flex flex-col">
+
+    <!-- Loading Screen Overlay -->
+    <div id="site-loader" class="fixed inset-0 z-[150] bg-cream flex flex-col items-center justify-center space-y-4 transition-opacity duration-500">
+        <div class="w-24 h-24 rounded-full bg-vintage-200 border-2 border-vintage-500 flex items-center justify-center overflow-hidden animate-bounce shadow-inner">
+            <img src="https://lh3.googleusercontent.com/d/13eZ5cv1sqxYB3-4j_OURBUBXMYd4XyKo" alt="לוגו ראשית הברכה" class="w-full h-full object-cover">
+        </div>
+        <h2 class="text-5xl font-bold text-vintage-900 tracking-wide">ראשית הברכה</h2>
+        <p class="text-2xl text-vintage-700 animate-pulse">טוען את היצירות והנתונים בשבילכם...</p>
+    </div>
+
+    <!-- Announcements Modal -->
+    <div id="announcements-modal" class="fixed inset-0 z-[100] bg-black/70 hidden backdrop-blur-sm flex items-center justify-center p-4" onclick="closeAnnouncementsModal()">
+        <div class="relative bg-cream w-full max-w-2xl rounded-3xl p-6 md:p-8 border-4 border-vintage-400 stitched-border vintage-shadow text-center space-y-6 max-h-[85vh] flex flex-col justify-between" onclick="event.stopPropagation()">
+            <button onclick="closeAnnouncementsModal()" class="absolute top-3 left-4 text-vintage-700 hover:text-vintage-900 text-3xl font-bold w-10 h-10 flex items-center justify-center transition-colors">✕</button>
+            <div class="space-y-2 border-b-2 border-vintage-200 pb-3">
+                <div class="w-14 h-14 rounded-full bg-vintage-200 border border-vintage-500 flex items-center justify-center text-vintage-800 text-2xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-bullhorn text-vintage-700"></i>
+                </div>
+                <h3 id="announcements-title" class="text-4xl font-bold text-vintage-800">הודעות ועדכונים</h3>
+            </div>
+            <div id="announcements-content" class="overflow-y-auto max-h-[50vh] px-2 text-right space-y-4">
+                <!-- נטען דינמית מהאקסל -->
+            </div>
+            <div class="pt-2 border-t border-vintage-200">
+                <button onclick="closeAnnouncementsModal()" class="w-full md:w-auto bg-vintage-500 hover:bg-vintage-600 text-white text-2xl font-bold px-8 py-2.5 rounded-2xl vintage-shadow transition-all duration-300 hover:scale-105 mx-auto">
+                    הבנתי, תודה!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimalist Floating Top-Right Menu Button (Disappears quickly on scroll) -->
+    <button id="floating-menu-btn" onclick="toggleMobileMenu()" aria-label="תפריט" class="fixed top-4 right-4 z-50 bg-cream/90 hover:bg-cream text-vintage-800 w-12 h-12 rounded-full border-2 border-vintage-300 shadow-md flex items-center justify-center transition-all duration-150 opacity-100 pointer-events-auto hover:scale-105">
+        <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+
+    <!-- Minimalist Side Menu Drawer (Slides from Left) -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-start" onclick="toggleMobileMenu()">
+        <div class="w-4/5 max-w-xs bg-cream h-full border-l-4 border-vintage-300 p-8 flex flex-col justify-between shadow-2xl transition-transform" onclick="event.stopPropagation()">
+            <div>
+                <div class="flex items-center justify-between border-b-2 border-vintage-200 pb-4 mb-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-vintage-400 shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/13eZ5cv1sqxYB3-4j_OURBUBXMYd4XyKo" alt="לוגו" class="w-full h-full object-cover">
+                        </div>
+                        <span id="drawer-brand-title" class="text-2xl font-bold text-vintage-800">ראשית הברכה</span>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-vintage-700 hover:text-vintage-900 text-2xl font-bold p-1 transition-colors">✕</button>
+                </div>
+                <nav class="flex flex-col gap-5 text-2xl font-bold text-vintage-900">
+                    <button onclick="switchCustomCategory('crochet'); toggleMobileMenu();" class="text-right hover:text-vintage-600 transition-colors flex items-center gap-3 py-1">
+                        <img src="https://img.icons8.com/?size=192&id=30769&format=png" alt="כיפה סרוגה" class="w-6 h-6 object-contain inline-block kippah-icon-style"> עיצוב כיפה
+                    </button>
+                    <button onclick="switchCustomCategory('wood'); toggleMobileMenu();" class="text-right hover:text-olive-700 transition-colors flex items-center gap-3 py-1">
+                        <i class="fa-solid fa-seedling text-olive-600 w-6"></i> עיצוב שלט/ברכה בעץ
+                    </button>
+                    <a href="#catalog" onclick="toggleMobileMenu()" class="hover:text-vintage-600 transition-colors flex items-center gap-3 py-1">
+                        <i class="fa-solid fa-images text-vintage-500 w-6"></i> גלריית עבודות
+                    </a>
+                    <a href="#gallery" onclick="toggleMobileMenu()" class="hover:text-vintage-600 transition-colors flex items-center gap-3 py-1">
+                        <i class="fa-solid fa-camera text-vintage-500 w-6"></i> גלריית תמונות
+                    </a>
+                    <a href="#shipping" onclick="toggleMobileMenu()" class="hover:text-vintage-600 transition-colors flex items-center gap-3 py-1">
+                        <i class="fa-solid fa-truck text-vintage-500 w-6"></i> משלוחים ואיסוף
+                    </a>
+                    <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-vintage-600 transition-colors flex items-center gap-3 py-1">
+                        <i class="fa-solid fa-phone text-vintage-500 w-6"></i> דברו איתי
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-vintage-200 pt-4 text-center">
+                <span class="text-lg text-vintage-600 font-bold block">עבודת יד מאהבה ❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="relative py-16 md:py-32 overflow-hidden border-b border-vintage-300 bg-cover bg-center flex items-center" style="background-image: linear-gradient(rgba(44, 24, 16, 0.70), rgba(44, 24, 16, 0.75)), url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&q=80&w=1600');">
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 space-y-6">
+            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full mx-auto overflow-hidden border-4 border-vintage-300 shadow-xl bg-cream/80 flex items-center justify-center mb-2">
+                <img src="https://lh3.googleusercontent.com/d/13eZ5cv1sqxYB3-4j_OURBUBXMYd4XyKo" alt="ראשית הברכה לוגו" class="w-full h-full object-cover">
+            </div>
+            <div class="inline-flex items-center bg-vintage-200/90 text-vintage-900 px-5 py-1.5 rounded-full border border-vintage-400 text-2xl font-bold shadow-md">
+                <span id="hero-badge">ראשית הברכה | הפינה של יובל</span>
+            </div>
+            <h2 id="hero-title" class="text-4xl md:text-6xl lg:text-7xl font-bold text-cream tracking-wide drop-shadow-md leading-tight">
+                כיפות סרוגות & אומנות בעץ זית,<br>
+                <span id="hero-subtitle-span" class="text-vintage-200">בהתאמה אישית ובמיוחד בשבילכם</span>
+            </h2>
+            <p id="hero-desc" class="text-2xl md:text-3xl text-vintage-100 max-w-2xl mx-auto leading-relaxed">
+                ברוכים הבאים ל"ראשית הברכה". כאן תוכלו למצוא כיפות סרוגות בעבודת יד עדינה ומדויקת, לצד שלטים, ברכות כלה וברכות להדלקת נרות המיוצרים מגזעי עץ זית טבעיים ומרהיבים.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-4">
+                <button onclick="switchCustomCategory('crochet')" class="bg-vintage-500 hover:bg-vintage-600 text-white text-2xl md:text-3xl font-bold px-6 py-3 rounded-2xl vintage-shadow transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>עיצוב כיפה אישית</span>
+                </button>
+                <button onclick="switchCustomCategory('wood')" class="bg-olive-600 hover:bg-olive-700 text-white text-2xl md:text-3xl font-bold px-6 py-3 rounded-2xl vintage-shadow transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <i class="fa-solid fa-scroll"></i>
+                    <span>עיצוב ברכה/שלט מעץ</span>
+                </button>
+                <a href="#catalog" class="bg-cream/90 hover:bg-cream text-vintage-800 text-2xl md:text-3xl font-bold px-6 py-3 rounded-2xl vintage-shadow border border-vintage-300 transition-all duration-300 hover:scale-105">
+                    לצפייה בקטלוג
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Order Section -->
+    <section id="custom-order" class="py-16 bg-vintage-100 border-b border-vintage-300">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center space-y-3 mb-8">
+                <h2 class="text-5xl font-bold text-vintage-800">תכנון ועיצוב אישי</h2>
+                <p class="text-2xl text-vintage-700 max-w-xl mx-auto">
+                    בחרו את סוג היצירה, התאימו את הפרטים, והמערכת תכין פנייה מוכנה ישירות לוואטסאפ!
+                </p>
+            </div>
+            <div class="max-w-xs mx-auto mb-6 bg-cream/90 p-1 rounded-xl border border-vintage-300 vintage-shadow flex items-center">
+                <button id="tab-crochet-btn" onclick="switchCustomCategory('crochet')" class="toggle-btn toggle-btn-left active-crochet w-1/2 py-1.5 px-2 text-xl font-bold transition-all flex items-center justify-center gap-1.5">
+                    <img src="https://img.icons8.com/?size=192&id=30769&format=png" alt="כיפה סרוגה" class="w-5 h-5 object-contain inline-block kippah-icon-style">
+                    <span>כיפה סרוגה</span>
+                </button>
+                <button id="tab-wood-btn" onclick="switchCustomCategory('wood')" class="toggle-btn toggle-btn-right w-1/2 py-1.5 px-2 text-xl font-bold text-olive-800 transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-seedling text-base"></i>
+                    <span>אומנות בעץ</span>
+                </button>
+            </div>
+            <div id="planner-box" class="bg-cream rounded-3xl p-6 md:p-10 border-2 border-vintage-300 vintage-shadow space-y-6">
+                
+                <!-- Updated Selected Model Banner with Clean Balanced Proportions -->
+                <div id="selected-model-banner" class="hidden bg-vintage-200/80 p-3 md:p-4 rounded-2xl border border-vintage-400 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div id="selected-model-img-container" class="w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-vintage-400 shrink-0 bg-white shadow-inner hidden">
+                            <img id="selected-model-img" src="" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span id="selected-model-label" class="text-base text-vintage-700 block font-bold leading-tight">סוג ההזמנה:</span>
+                            <span id="selected-model-name" class="text-xl md:text-2xl text-vintage-900 font-bold leading-tight">---</span>
+                        </div>
+                    </div>
+                    <button onclick="resetSelectedModel()" class="text-vintage-700 hover:text-vintage-900 text-lg underline font-bold shrink-0">שנה / איפוס</button>
+                </div>
+
+                <!-- FORM 1: Crochet Kippah Form -->
+                <div id="crochet-form" class="space-y-6">
+                    <!-- כפתור ארוך אחד מאוחד לבחירת סוג הכיפה -->
+                    <div id="kippah-style-selector" class="flex rounded-xl border-2 border-vintage-300 overflow-hidden vintage-shadow">
+                        <button type="button" data-style="שטוחה" onclick="selectKippahStyle('שטוחה', this)" class="kippah-style-btn flex-1 bg-vintage-500 text-white font-bold py-2 px-2 text-xl transition-all text-center">שטוחה</button>
+                        <button type="button" data-style="גדולה רגילה" onclick="selectKippahStyle('גדולה רגילה', this)" class="kippah-style-btn flex-1 bg-cream text-vintage-800 border-r-2 border-l-2 border-vintage-300 font-bold py-2 px-2 text-xl hover:bg-vintage-200 transition-all text-center">גדולה רגילה</button>
+                        <button type="button" data-style="ברבוש" onclick="selectKippahStyle('ברבוש', this)" class="kippah-style-btn flex-1 bg-cream text-vintage-800 font-bold py-2 px-2 text-xl hover:bg-vintage-200 transition-all text-center">ברבוש</button>
+                    </div>
+
+                    <div id="crochet-design-mode-container" class="grid grid-cols-2 gap-2 bg-vintage-100/60 px-3 py-2.5 rounded-xl border border-vintage-300 text-center">
+                        <label class="flex items-center justify-center gap-1.5 cursor-pointer text-lg font-bold text-vintage-900">
+                            <input type="radio" name="crochet-mode" value="template" checked onchange="toggleCrochetDesignMode('template')" class="accent-vintage-600 w-3.5 h-3.5">
+                            <span>לפי תבנית</span>
+                        </label>
+                        <label class="flex items-center justify-center gap-1.5 cursor-pointer text-lg font-bold text-vintage-900">
+                            <input type="radio" name="crochet-mode" value="custom" onchange="toggleCrochetDesignMode('custom')" class="accent-vintage-600 w-3.5 h-3.5">
+                            <span>התאמה אישית</span>
+                        </label>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-2xl font-bold text-vintage-800">1. גודל הכיפה (ס״מ):</label>
+                        <select id="size-select" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></select>
+                    </div>
+                    <div id="crochet-template-fields" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-vintage-800">2. צבע בסיס מרכזי:</label>
+                            <select id="main-color" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-vintage-800">3. צבע נוסף:</label>
+                            <select id="secondary-color" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-vintage-800">4. צבע השוליים:</label>
+                            <select id="border-color" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></select>
+                        </div>
+                    </div>
+                    <div id="crochet-custom-fields" class="space-y-1 hidden">
+                        <label class="block text-2xl font-bold text-vintage-800">2. תיאור מילולי:</label>
+                        <textarea id="crochet-full-custom-desc" rows="3" placeholder="תארו את הכיפה שאתם מדמיינים... אפשר לשלוח גם תמונה בוואטסאפ :)" class="w-full p-3 rounded-xl border-2 border-vintage-400 bg-white text-vintage-900"></textarea>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-2xl font-bold text-vintage-800">אופן אספקה:</label>
+                        <select id="shipping-method-crochet" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></select>
+                    </div>
+                    <div class="space-y-1 pt-1">
+                        <label class="block text-2xl font-bold text-vintage-800">הערות או בקשות נוספות:</label>
+                        <textarea id="notes-crochet" rows="2" placeholder="ניתן לבחור גם בצבעים שונים מהדגמים המוצעים ולרשום אותם כאן :)" class="w-full p-2.5 rounded-xl border-2 border-vintage-300 bg-white text-vintage-900"></textarea>
+                    </div>
+                </div>
+
+                <!-- FORM 2: Wood Art Form -->
+                <div id="wood-form" class="space-y-6 hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-olive-800">1. סוג היצירה:</label>
+                            <select id="wood-type-select" class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-olive-800">2. קוטר / גודל גזע העץ:</label>
+                            <select id="wood-diameter-select" class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-olive-800">3. צבע הכיתוב:</label>
+                            <select id="wood-text-color" class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-2xl font-bold text-olive-800">4. עיטורים וקישוטים:</label>
+                            <select id="wood-decorations" class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></select>
+                        </div>
+                        <div class="space-y-1 md:col-span-2">
+                            <label class="block text-2xl font-bold text-olive-800">5. אופן אספקה:</label>
+                            <select id="shipping-method-wood" class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></select>
+                        </div>
+                    </div>
+                    <div class="space-y-1 pt-1">
+                        <label class="block text-2xl font-bold text-olive-800">6. הטקסט / המשפט שתרצו לכתוב על העץ:</label>
+                        <textarea id="wood-custom-text" rows="2" placeholder="למשל: נוסח ברכת כלה, אשת חיל, ברכת הבית..." class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></textarea>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-2xl font-bold text-olive-800">7. הערות או בקשות מיוחדות:</label>
+                        <textarea id="notes-wood" rows="2" placeholder="תאריך, שמות, הערות עיצוביות נוספות וכדומה..." class="w-full p-2.5 rounded-xl border-2 border-olive-300 bg-white text-vintage-900"></textarea>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <button onclick="sendOrderToWhatsapp()" class="w-full md:w-auto bg-whatsapp hover:bg-emerald-600 text-white text-3xl font-bold px-10 py-3.5 rounded-2xl vintage-shadow transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3 mx-auto">
+                        <i class="fa-brands fa-whatsapp text-4xl"></i>
+                        <span>שלחו לי את ההזמנה לוואטסאפ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="py-16 max-w-6xl mx-auto px-4">
+        <div class="text-center space-y-3 mb-8">
+            <h2 class="text-5xl font-bold text-vintage-800">גלריית עבודות ומוצרים</h2>
+            <p class="text-2xl text-vintage-600 max-w-xl mx-auto">
+                הצצי בקטלוג הדגמים והיצירות שלי. ניתן לבחור כל דגם ולשנות צבעים ומידות!
+            </p>
+        </div>
+        <div class="flex justify-center flex-wrap gap-3 mb-10">
+            <button onclick="filterCatalog('all')" id="filter-all" class="cat-filter-btn bg-vintage-800 text-cream px-5 py-2 rounded-xl text-2xl font-bold transition-all shadow">
+                כל היצירות
+            </button>
+            <button onclick="filterCatalog('crochet')" id="filter-crochet" class="cat-filter-btn bg-vintage-200 text-vintage-800 hover:bg-vintage-300 px-5 py-2 rounded-xl text-2xl font-bold transition-all shadow">
+                🧶 כיפות סרוגות
+            </button>
+            <button onclick="filterCatalog('wood')" id="filter-wood" class="cat-filter-btn bg-vintage-200 text-vintage-800 hover:bg-vintage-300 px-5 py-2 rounded-xl text-2xl font-bold transition-all shadow">
+                🌿 אומנות בעץ זית & ברכות
+            </button>
+        </div>
+        <div id="catalog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- נטען דינמית מהאקסל -->
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-16 bg-vintage-50 border-y border-vintage-300">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center space-y-3 mb-10">
+                <div class="inline-flex items-center gap-2 text-vintage-600 text-2xl font-bold">
+                    <i class="fa-solid fa-camera text-vintage-600"></i>
+                    <span>תמונות שמחממות את הלב</span>
+                </div>
+                <h2 class="text-5xl font-bold text-vintage-800">גלריית תמונות</h2>
+            </div>
+            <div id="gallery-container" class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                <!-- נטען דינמית מהאקסל -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shipping Section -->
+    <section id="shipping" class="py-16 bg-cream border-b border-vintage-300">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center space-y-3 mb-10">
+                <h2 class="text-5xl font-bold text-vintage-800">משלוחים ואיסוף עצמי</h2>
+                <p class="text-2xl text-vintage-600">תוכלו לבחור את האפשרות הנוחה לכם ביותר לקבלת ההזמנה</p>
+            </div>
+            <div id="shipping-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- נטען דינמית מהאקסל -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 max-w-4xl mx-auto px-4 text-center space-y-6">
+        <h2 class="text-5xl font-bold text-vintage-800">מוזמנים לדבר איתי</h2>
+        <p class="text-2xl text-vintage-700 max-w-xl mx-auto">
+            יש לכם שאלה? רוצים להתייעץ לגבי מידה, סוג עץ או דגמים מיוחדים? אני כאן בשבילכם.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+            <a id="contact-whatsapp-btn" href="https://wa.me/972526328393" target="_blank" class="bg-whatsapp text-white text-3xl font-bold px-8 py-3 rounded-2xl vintage-shadow hover:bg-emerald-600 transition-all flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-3xl"></i>
+                <span>פנייה ישירה בוואטסאפ</span>
+            </a>
+            <a id="contact-phone-btn" href="tel:0526328393" class="bg-vintage-700 text-cream text-3xl font-bold px-8 py-3 rounded-2xl vintage-shadow hover:bg-vintage-800 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-phone text-2xl"></i>
+                <span id="phone-text">חייגו אליי: 052-6328393</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a id="floating-whatsapp" href="https://wa.me/972526328393" target="_blank" class="fixed bottom-6 left-6 z-50 bg-whatsapp hover:bg-emerald-600 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 hover:scale-105 border-2 border-white/30">
+        <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+        <span class="text-2xl font-bold tracking-wide">דברו איתי</span>
+    </a>
+
+    <!-- Lightbox Modal -->
+    <div id="gallery-lightbox" class="fixed inset-0 z-50 bg-black/85 hidden backdrop-blur-sm flex items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-4xl max-h-[90vh] w-full flex items-center justify-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 left-0 text-cream hover:text-vintage-200 text-3xl font-bold w-10 h-10 flex items-center justify-center">✕</button>
+            <img id="lightbox-img" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[85vh] rounded-2xl object-contain shadow-2xl border-2 border-vintage-300">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-vintage-900 text-cream py-8 border-t-4 border-vintage-500 text-center space-y-3">
+        <p id="footer-title" class="text-3xl font-bold">ראשית הברכה - כיפות סרוגות & אומנות בעץ זית בעבודת יד</p>
+        <p id="footer-contact" class="text-xl text-vintage-300">טלפון ליצירת קשר: 052-6328393 | איסוף עצמי מעמק דותן</p>
+        <p id="footer-copyright" class="text-lg text-vintage-400 font-sans opacity-80">© כל הזכויות שמורות ליובל - ראשית הברכה</p>
+    </footer>
+
+    <!-- Dynamic CMS Script connected directly to Google Apps Script -->
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwtslMlsumgltWv0s61eV2PIsFOufvbeZrolOzDfWNndVxwEMRL-ojZZuyqbCvztT1t6Q/exec';
+
+        let siteData = {};
+        let currentCustomCategory = 'crochet';
+        let selectedModel = '';
+        let currentFilter = 'all';
+        let crochetDesignMode = 'template';
+        let selectedKippahStyle = 'שטוחה';
+        let whatsappNumber = '972526328393';
+        let phoneNumber = '052-6328393';
+
+        function selectKippahStyle(style, btnElement) {
+            selectedKippahStyle = style;
+            const buttons = document.querySelectorAll('.kippah-style-btn');
+            buttons.forEach(btn => {
+                btn.className = 'kippah-style-btn flex-1 bg-cream text-vintage-800 font-bold py-2 px-2 text-xl hover:bg-vintage-200 transition-all text-center border-r-2 border-l-2 border-vintage-300';
+            });
+            if (btnElement) {
+                btnElement.className = 'kippah-style-btn flex-1 bg-vintage-500 text-white font-bold py-2 px-2 text-xl transition-all text-center';
+            }
+        }
+
+        function setKippahStyleButtonsState(disabled) {
+            const buttons = document.querySelectorAll('.kippah-style-btn');
+            buttons.forEach(btn => {
+                btn.disabled = disabled;
+                if (disabled) {
+                    btn.classList.add('opacity-60', 'cursor-not-allowed', 'pointer-events-none');
+                } else {
+                    btn.classList.remove('opacity-60', 'cursor-not-allowed', 'pointer-events-none');
+                }
+            });
+        }
+
+        async function fetchSiteData() {
+            try {
+                const response = await fetch(API_URL);
+                siteData = await response.json();
+                initSiteFromData();
+            } catch (error) {
+                console.error('שגיאה בטעינת הנתונים מה-API:', error);
+            } finally {
+                // הסרת מסך הטעינה בסיום קבלת הנתונים (הצלחה או שגיאה)
+                const loader = document.getElementById('site-loader');
+                if (loader) {
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => loader.remove(), 500);
+                }
+            }
+        }
+
+        function initSiteFromData() {
+            // 1. הגדרות כלליות
+            if (siteData['הגדרות כלליות']) {
+                const settings = {};
+                siteData['הגדרות כלליות'].forEach(row => { settings[row['מפתח']] = row['ערך']; });
+
+                if (settings['כותרת האתר']) document.getElementById('site-title').innerText = settings['כותרת האתר'];
+                if (settings['כותרת הדר']) {
+                    const drawerBrand = document.getElementById('drawer-brand-title');
+                    if(drawerBrand) drawerBrand.innerText = settings['כותרת הדר'];
+                }
+                if (settings['תגית הירו']) document.getElementById('hero-badge').innerText = settings['תגית הירו'];
+                if (settings['כותרת הירו']) {
+                    document.getElementById('hero-title').innerHTML = `${settings['כותרת הירו']}<br><span id="hero-subtitle-span" class="text-vintage-200">${settings['תת כותרת הירו'] || 'בהתאמה אישית ובמיוחד בשבילכם'}</span>`;
+                } else if (settings['תת כותרת הירו']) {
+                    const subSpan = document.getElementById('hero-subtitle-span');
+                    if(subSpan) subSpan.innerText = settings['תת כותרת הירו'];
+                }
+                if (settings['תיאור הירו']) document.getElementById('hero-desc').innerText = settings['תיאור הירו'];
+                
+                // טיפול בתמונת רקע הירו מתוך הטבלה
+                if (settings['תמונת רקע הירו']) {
+                    document.getElementById('hero-section').style.backgroundImage = `linear-gradient(rgba(44, 24, 16, 0.70), rgba(44, 24, 16, 0.75)), url('${settings['תמונת רקע הירו']}')`;
+                }
+
+                if (settings['מספר וואטסאפ']) {
+                    whatsappNumber = String(settings['מספר וואטסאפ']);
+                    document.getElementById('contact-whatsapp-btn').href = `https://wa.me/${whatsappNumber}`;
+                    document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappNumber}`;
+                }
+                if (settings['טלפון להתקשרות']) {
+                    phoneNumber = String(settings['טלפון להתקשרות']);
+                    document.getElementById('contact-phone-btn').href = `tel:${phoneNumber}`;
+                    document.getElementById('phone-text').innerText = `חייגו אליי: ${phoneNumber}`;
+                }
+                if (settings['כתובית פוטר']) document.getElementById('footer-title').innerText = settings['כתובית פוטר'];
+                if (settings['פרטי פוטר']) document.getElementById('footer-contact').innerText = settings['פרטי פוטר'];
+                if (settings['זכויות יוצרים']) document.getElementById('footer-copyright').innerText = settings['זכויות יוצרים'];
+            }
+
+            // 2. הודעות ועדכונים (Modal)
+            if (siteData['הודעות ועדכונים']) {
+                const activeAnnouncements = siteData['הודעות ועדכונים'].filter(item => String(item['פעיל']) === 'true' || item['פעיל'] === true);
+                if (activeAnnouncements.length > 0) {
+                    const container = document.getElementById('announcements-content');
+                    container.innerHTML = '';
+                    if (activeAnnouncements.length === 1) {
+                        const ann = activeAnnouncements[0];
+                        container.innerHTML = `
+                            <div class="bg-vintage-100 p-6 md:p-8 rounded-3xl border-2 border-vintage-400 text-center space-y-4">
+                                <h4 class="text-3xl md:text-4xl font-bold text-vintage-900">${ann['כותרת ההודעה']}</h4>
+                                <p class="text-2xl md:text-3xl text-vintage-800 leading-relaxed">${ann['תוכן ההודעה']}</p>
+                                <span class="text-xl text-vintage-600 block pt-2 font-bold">${ann['תאריך']}</span>
+                            </div>
+                        `;
+                    } else {
+                        activeAnnouncements.forEach(ann => {
+                            container.innerHTML += `
+                                <div class="bg-vintage-100 p-4 rounded-2xl border border-vintage-300 text-right space-y-2">
+                                    <h4 class="text-2xl font-bold text-vintage-800 mb-1">${ann['כותרת ההודעה']}</h4>
+                                    <p class="text-xl text-vintage-700">${ann['תוכן ההודעה']}</p>
+                                    <span class="text-sm text-vintage-500 block mt-2">${ann['תאריך']}</span>
+                                </div>
+                            `;
+                        });
+                    }
+                    document.getElementById('announcements-modal').classList.remove('hidden');
+                }
+            }
+
+            // 3. טעינת אפשרויות לטפסים (Dropdowns)
+            populateSelect('size-select', siteData['כיפות - גודל'], 'אפשרות בחירה');
+            populateSelect('main-color', siteData['כיפות - צבע בסיס'], 'אפשרות בחירה');
+            populateSelect('secondary-color', siteData['כיפות - צבע משני'], 'אפשרות בחירה');
+            populateSelect('border-color', siteData['כיפות - צבע שוליים'], 'אפשרות בחירה');
+            populateSelect('wood-type-select', siteData['עץ - סוג יצירה'], 'אפשרות בחירה');
+            populateSelect('wood-diameter-select', siteData['עץ - גודל קוטר'], 'אפשרות בחירה');
+            populateSelect('wood-text-color', siteData['עץ - צבע כיתוב'], 'אפשרות בחירה');
+            populateSelect('wood-decorations', siteData['עץ - עיטורים'], 'אפשרות בחירה');
+            
+            // Shipping options
+            if (siteData['אפשרויות משלוח']) {
+                const activeShipping = siteData['אפשרויות משלוח'].filter(s => String(s['פעיל']) === 'true' || s['פעיל'] === true);
+                
+                const cShip = document.getElementById('shipping-method-crochet');
+                const wShip = document.getElementById('shipping-method-wood');
+                cShip.innerHTML = '';
+                wShip.innerHTML = '';
+                activeShipping.forEach(s => {
+                    const opt = `<option value="${s['שם האפשרות']}">${s['שם האפשרות']} - ${s['תיאור']}</option>`;
+                    cShip.innerHTML += opt;
+                    wShip.innerHTML += opt;
+                });
+
+                const shipCards = document.getElementById('shipping-cards-container');
+                shipCards.innerHTML = '';
+                activeShipping.forEach(s => {
+                    shipCards.innerHTML += `
+                        <div class="bg-vintage-50 p-6 rounded-2xl border-2 border-vintage-300 vintage-shadow flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-full bg-vintage-200 border border-vintage-500 flex items-center justify-center shrink-0 text-vintage-800 text-2xl">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-vintage-800 mb-1">${s['שם האפשרות']}</h3>
+                                <p class="text-xl text-vintage-700">${s['תיאור']}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // 4. קטלוג וגלריית תמונות
+            renderCatalogItems();
+            renderGalleryItems();
+        }
+
+        function populateSelect(elementId, dataArray, keyName) {
+            const selectEl = document.getElementById(elementId);
+            if (!selectEl || !dataArray) return;
+            selectEl.innerHTML = '';
+            dataArray.forEach(item => {
+                if (String(item['פעיל']) === 'true' || item['פעיל'] === true || item['פעיל'] === undefined) {
+                    const val = item[keyName];
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.innerText = val;
+                    if (item['ברירת מחדל'] === true || String(item['ברירת מחדל']) === 'true') {
+                        opt.selected = true;
+                    }
+                    selectEl.appendChild(opt);
+                }
+            });
+        }
+
+        function getCombinedCatalog() {
+            let list = [];
+            if (siteData['קטלוג כיפות']) {
+                siteData['קטלוג כיפות'].forEach(item => {
+                    list.push({
+                        name: item['דגם'],
+                        desc: item['תיאור'],
+                        price: item['מחיר'],
+                        typeVal: item['סוג'],
+                        img: item['קישור לתמונה'],
+                        type: 'crochet'
+                    });
+                });
+            }
+            if (siteData['קטלוג אומנות בעץ']) {
+                siteData['קטלוג אומנות בעץ'].forEach(item => {
+                    list.push({
+                        name: item['דגם'],
+                        desc: item['תיאור'],
+                        price: item['מחיר'],
+                        tag: item['תגית'],
+                        img: item['קישור לתמונה'],
+                        type: 'wood'
+                    });
+                });
+            }
+            return list;
+        }
+
+        function renderCatalogItems() {
+            const catalogContainer = document.getElementById('catalog-container');
+            catalogContainer.innerHTML = '';
+            const catalogItems = getCombinedCatalog();
+
+            const filtered = catalogItems.filter(item => {
+                if (currentFilter === 'all') return true;
+                return item.type === currentFilter;
+            });
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                const isWood = item.type === 'wood';
+                const tagOrType = isWood ? item.tag : item.typeVal;
+                card.className = `bg-cream rounded-2xl border-2 ${isWood ? 'border-olive-300' : 'border-vintage-200'} p-4 vintage-shadow flex flex-col justify-between group hover:border-vintage-400 transition-all`;
+                card.innerHTML = `
+                    <div>
+                        <div class="aspect-square w-full rounded-xl overflow-hidden bg-vintage-100 mb-4 relative">
+                            <img src="${item.img}" alt="${item.name}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            ${tagOrType ? `<span class="absolute top-3 right-3 ${isWood ? 'bg-olive-700' : 'bg-vintage-800'} text-cream text-lg px-3 py-1 rounded-full font-bold">${tagOrType}</span>` : ''}
+                            ${item.price ? `<span class="absolute bottom-3 left-3 ${isWood ? 'bg-olive-800/90' : 'bg-vintage-700/90'} text-cream text-xl px-3 py-1 rounded-xl font-bold shadow-md">${item.price} ₪</span>` : ''}
+                        </div>
+                        <h3 class="text-3xl font-bold ${isWood ? 'text-olive-900' : 'text-vintage-800'} mb-1">${item.name}</h3>
+                        <p class="text-xl text-vintage-600 mb-4">${item.desc}</p>
+                    </div>
+                    <button onclick="selectModelFromCatalog('${item.name}', '${item.type}')" class="w-full ${isWood ? 'bg-olive-200 hover:bg-olive-600 hover:text-white text-olive-800' : 'bg-vintage-200 hover:bg-vintage-500 hover:text-white text-vintage-800'} text-2xl py-2 rounded-xl transition-colors font-bold">
+                        ${isWood ? 'אני רוצה שלט/ברכה כזו!' : 'אני רוצה כיפה כזו!'}
+                    </button>
+                `;
+                catalogContainer.appendChild(card);
+            });
+        }
+
+        function renderGalleryItems() {
+            const galleryContainer = document.getElementById('gallery-container');
+            galleryContainer.innerHTML = '';
+            
+            let images = [];
+            if (siteData['גלריית תמונות']) {
+                images = siteData['גלריית תמונות'].filter(img => String(img['פעיל']) === 'true' || img['פעיל'] === true).map(i => i['קישור לתמונה']);
+            }
+
+            images.forEach(url => {
+                const div = document.createElement('div');
+                div.className = "break-inside-avoid relative group rounded-2xl border-2 border-vintage-200 overflow-hidden vintage-shadow cursor-pointer hover:border-vintage-500 transition-all hover:-translate-y-1 bg-cream";
+                div.onclick = () => openLightbox(url);
+                div.innerHTML = `
+                    <img src="${url}" loading="lazy" decoding="async" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 block">
+                    <div class="absolute inset-0 bg-vintage-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-cream text-2xl drop-shadow"></i>
+                    </div>
+                `;
+                galleryContainer.appendChild(div);
+            });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu-drawer').classList.toggle('hidden');
+        }
+
+        function switchCustomCategory(cat, keepModel = false) {
+            currentCustomCategory = cat;
+            if (!keepModel) {
+                resetSelectedModel();
+            }
+
+            const crochetForm = document.getElementById('crochet-form');
+            const woodForm = document.getElementById('wood-form');
+            const tabCrochetBtn = document.getElementById('tab-crochet-btn');
+            const tabWoodBtn = document.getElementById('tab-wood-btn');
+
+            if (cat === 'crochet') {
+                crochetForm.classList.remove('hidden');
+                woodForm.classList.add('hidden');
+                tabCrochetBtn.classList.add('active-crochet');
+                tabCrochetBtn.classList.remove('text-vintage-800');
+                tabWoodBtn.classList.remove('active-wood');
+                tabWoodBtn.classList.add('text-olive-800');
+            } else {
+                crochetForm.classList.add('hidden');
+                woodForm.classList.remove('hidden');
+                tabCrochetBtn.classList.remove('active-crochet');
+                tabCrochetBtn.classList.add('text-vintage-800');
+                tabWoodBtn.classList.add('active-wood');
+                tabWoodBtn.classList.remove('text-olive-800');
+            }
+            document.getElementById('custom-order').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleCrochetDesignMode(mode) {
+            crochetDesignMode = mode;
+            const templateFields = document.getElementById('crochet-template-fields');
+            const customFields = document.getElementById('crochet-custom-fields');
+            const customDesc = document.getElementById('crochet-full-custom-desc');
+            const notesCrochet = document.getElementById('notes-crochet');
+
+            // עדכון ויזואלי של כפתורי ה-Radio בהתאם למצב
+            const radioInput = document.querySelector(`input[name="crochet-mode"][value="${mode}"]`);
+            if (radioInput) radioInput.checked = true;
+
+            if (mode === 'template') {
+                templateFields.classList.remove('hidden');
+                customFields.classList.add('hidden');
+                if (notesCrochet) {
+                    notesCrochet.placeholder = 'ניתן לבחור גם בצבעים שונים מהדגמים המוצעים ולרשום אותם כאן :)';
+                }
+            } else {
+                templateFields.classList.add('hidden');
+                customFields.classList.remove('hidden');
+                // אם זה מצב התאמה אישית כללי (ולא כיפה ייחודית מהקטלוג), נוודא שהרמז הוא הרמז הרגיל
+                if (!selectedModel) {
+                    if (customDesc) customDesc.placeholder = 'תארו את הכיפה שאתם מדמיינים... אפשר לשלוח גם תמונה בוואטסאפ :)';
+                }
+                if (notesCrochet) {
+                    notesCrochet.placeholder = 'ניתן לרשום הערות נוספות, בקשות כלליות וכו\' :)';
+                }
+            }
+        }
+
+        function closeAnnouncementsModal() {
+            document.getElementById('announcements-modal').classList.add('hidden');
+        }
+
+        function filterCatalog(type) {
+            currentFilter = type;
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-vintage-800', 'text-cream');
+                btn.classList.add('bg-vintage-200', 'text-vintage-800');
+            });
+            const activeBtn = document.getElementById(`filter-${type}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-vintage-200', 'text-vintage-800');
+                activeBtn.classList.add('bg-vintage-800', 'text-cream');
+            }
+            renderCatalogItems();
+        }
+
+        // פונקציה המאפסת מחדש את כל רשימות הבחירה (Dropdowns) והשדות למצב ההתחלתי מתוך האקסל המקורי
+        function resetFormFieldsToDefault(type) {
+            if (type === 'crochet') {
+                populateSelect('size-select', siteData['כיפות - גודל'], 'אפשרות בחירה');
+                populateSelect('main-color', siteData['כיפות - צבע בסיס'], 'אפשרות בחירה');
+                populateSelect('secondary-color', siteData['כיפות - צבע משני'], 'אפשרות בחירה');
+                populateSelect('border-color', siteData['כיפות - צבע שוליים'], 'אפשרות בחירה');
+                
+                const customDesc = document.getElementById('crochet-full-custom-desc');
+                if (customDesc) {
+                    customDesc.value = '';
+                    customDesc.placeholder = 'תארו את הכיפה שאתם מדמיינים... אפשר לשלוח גם תמונה בוואטסאפ :)';
+                }
+                
+                const notesCrochet = document.getElementById('notes-crochet');
+                if (notesCrochet) {
+                    notesCrochet.value = '';
+                    notesCrochet.placeholder = 'ניתן לבחור גם בצבעים שונים מהדגמים המוצעים ולרשום אותם כאן :)';
+                }
+
+                // החזרה מפורשת למצב תבנית כולל סימון ה-Radio הנכון
+                toggleCrochetDesignMode('template');
+                setKippahStyleButtonsState(false);
+            } else {
+                populateSelect('wood-type-select', siteData['עץ - סוג יצירה'], 'אפשרות בחירה');
+                populateSelect('wood-diameter-select', siteData['עץ - גודל קוטר'], 'אפשרות בחירה');
+                populateSelect('wood-text-color', siteData['עץ - צבע כיתוב'], 'אפשרות בחירה');
+                populateSelect('wood-decorations', siteData['עץ - עיטורים'], 'אפשרות בחירה');
+                
+                const woodCustomText = document.getElementById('wood-custom-text');
+                if (woodCustomText) woodCustomText.value = '';
+                
+                const notesWood = document.getElementById('notes-wood');
+                if (notesWood) notesWood.value = '';
+            }
+        }
+
+        // פונקציית עזר להזנת ערך לתיבת בחירה (Select) או הוספתו במידה ואינו קיים ברשימה ההתחלתית
+        function setSelectValueOrAdd(elementId, value) {
+            const selectEl = document.getElementById(elementId);
+            if (!selectEl || !value) return;
+            let found = false;
+            for (let opt of selectEl.options) {
+                if (opt.value === String(value) || opt.innerText.trim() === String(value).trim()) {
+                    selectEl.value = opt.value;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                const opt = document.createElement('option');
+                opt.value = value;
+                opt.innerText = value;
+                opt.selected = true;
+                selectEl.appendChild(opt);
+            }
+        }
+
+        function selectModelFromCatalog(modelName, type) {
+            // צעד 1: איפוס מלא של כל השדות והרשימות למצב ההתחלתי מתוך נתוני האקסל המקוריים
+            resetFormFieldsToDefault(type);
+
+            // צעד 2: מעבר לקטגוריה הנכונה מבלי לאפס את הדגם
+            switchCustomCategory(type, true);
+
+            // צעד 3: טעינת הדגם החדש
+            selectedModel = modelName;
+            const banner = document.getElementById('selected-model-banner');
+            const label = document.getElementById('selected-model-label');
+            const name = document.getElementById('selected-model-name');
+            const designModeContainer = document.getElementById('crochet-design-mode-container');
+            
+            label.innerText = 'דגם שנבחר מהקטלוג:';
+            name.innerText = modelName;
+            banner.classList.remove('hidden');
+
+            let catalogList = type === 'crochet' ? siteData['קטלוג כיפות'] : siteData['קטלוג אומנות בעץ'];
+            let item = catalogList ? catalogList.find(i => i['דגם'] === modelName) : null;
+
+            // טעינת תמונת המוצר הנבחר לתגית בחלק העליון של אזור התכנון
+            const imgContainer = document.getElementById('selected-model-img-container');
+            const imgElement = document.getElementById('selected-model-img');
+            if (imgContainer && imgElement) {
+                if (item && item['קישור לתמונה']) {
+                    imgElement.src = item['קישור לתמונה'];
+                    imgElement.alt = modelName;
+                    imgContainer.classList.remove('hidden');
+                } else {
+                    imgContainer.classList.add('hidden');
+                }
+            }
+
+            if (type === 'wood') {
+                banner.className = "bg-olive-100/90 p-3 md:p-4 rounded-2xl border border-olive-400 flex items-center justify-between gap-3";
+                label.className = "text-base text-olive-700 block font-bold leading-tight";
+                name.className = "text-xl md:text-2xl text-olive-900 font-bold leading-tight";
+                banner.querySelector('button').className = "text-olive-700 hover:text-olive-900 text-lg underline font-bold shrink-0";
+                if (imgContainer) {
+                    imgContainer.className = "w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-olive-400 shrink-0 bg-white shadow-inner";
+                }
+
+                if (item) {
+                    if (item['סוג היצירה']) setSelectValueOrAdd('wood-type-select', item['סוג היצירה']);
+                    if (item['צבע הכיתוב']) setSelectValueOrAdd('wood-text-color', item['צבע הכיתוב']);
+                    if (item['עיטורים וקישוטים']) setSelectValueOrAdd('wood-decorations', item['עיטורים וקישוטים']);
+                }
+            } else {
+                banner.className = "bg-vintage-200/80 p-3 md:p-4 rounded-2xl border border-vintage-400 flex items-center justify-between gap-3";
+                label.className = "text-base text-vintage-700 block font-bold leading-tight";
+                name.className = "text-xl md:text-2xl text-vintage-900 font-bold leading-tight";
+                banner.querySelector('button').className = "text-vintage-700 hover:text-vintage-900 text-lg underline font-bold shrink-0";
+                if (imgContainer) {
+                    imgContainer.className = "w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-vintage-400 shrink-0 bg-white shadow-inner";
+                }
+                if (designModeContainer) designModeContainer.classList.add('hidden');
+
+                if (item) {
+                    // בדיקה אוטומטית האם שדות צבעי התבנית ריקים (כיפה ייחודית מהקטלוג)
+                    const baseColor = item['צבע בסיסי'] ? String(item['צבע בסיסי']).trim() : '';
+                    const secColor = item['צבע נוסף'] ? String(item['צבע נוסף']).trim() : '';
+                    const borderColor = item['צבע השוליים'] ? String(item['צבע השוליים']).trim() : '';
+
+                    const isUniqueKippah = (!baseColor || baseColor === '' || baseColor === 'ללא') && 
+                                           (!secColor || secColor === '' || secColor === 'ללא') && 
+                                           (!borderColor || borderColor === '' || borderColor === 'ללא');
+
+                    if (isUniqueKippah) {
+                        // כיפה ייחודית - מעבר אוטומטי למצב התאמה אישית עם רמז מותאם אישית
+                        toggleCrochetDesignMode('custom');
+                        const customDesc = document.getElementById('crochet-full-custom-desc');
+                        if (customDesc) {
+                            customDesc.placeholder = 'כאן תוכל להוסיף דגשים מיוחדים, בקשה לשינוי בצבעים או בקשות, או פשוט להשאיר ריק ואסרוג בדיוק כמו שזה מופיע :)';
+                        }
+                    } else {
+                        toggleCrochetDesignMode('template');
+                        if (item['צבע בסיסי']) setSelectValueOrAdd('main-color', item['צבע בסיסי']);
+                        if (item['צבע נוסף']) setSelectValueOrAdd('secondary-color', item['צבע נוסף']);
+                        if (item['צבע השוליים']) setSelectValueOrAdd('border-color', item['צבע השוליים']);
+                        
+                        const notesCrochet = document.getElementById('notes-crochet');
+                        if (notesCrochet) {
+                            notesCrochet.placeholder = 'ניתן לבחור גם בצבעים שונים מהדגם ולרשום אותם כאן :)';
+                        }
+                    }
+                    
+                    // עדכון סוג הכיפה ונעילת הכפתור
+                    if (item['סוג']) {
+                        const targetStyle = String(item['סוג']).trim();
+                        const btnToSelect = Array.from(document.querySelectorAll('.kippah-style-btn')).find(b => b.getAttribute('data-style') === targetStyle);
+                        if (btnToSelect) {
+                            selectKippahStyle(targetStyle, btnToSelect);
+                        }
+                    }
+                    setKippahStyleButtonsState(true);
+                }
+            }
+        }
+
+        function resetSelectedModel() {
+            // בעת לחיצה על "שנה / איפוס", מחזירים את כל השדות והאפשרויות ברשימה למצבם ההתחלתי
+            resetFormFieldsToDefault(currentCustomCategory);
+
+            selectedModel = '';
+            const banner = document.getElementById('selected-model-banner');
+            if (banner) banner.classList.add('hidden');
+            
+            const imgContainer = document.getElementById('selected-model-img-container');
+            if (imgContainer) {
+                imgContainer.classList.add('hidden');
+                imgContainer.className = "w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-vintage-400 shrink-0 bg-white shadow-inner hidden";
+            }
+            const imgElement = document.getElementById('selected-model-img');
+            if (imgElement) imgElement.src = '';
+
+            const designModeContainer = document.getElementById('crochet-design-mode-container');
+            if (designModeContainer) designModeContainer.classList.remove('hidden');
+
+            setKippahStyleButtonsState(false);
+
+            // איפוס טקסט הרמז (Placeholder) בשדה ההתאמה האישית בחזרה לברירת המחדל
+            const customDesc = document.getElementById('crochet-full-custom-desc');
+            if (customDesc) {
+                customDesc.placeholder = 'תארו את הכיפה שאתם מדמיינים... אפשר לשלוח גם תמונה בוואטסאפ :)';
+            }
+
+            // איפוס טקסט הרמז בשדה ההערות
+            const notesCrochet = document.getElementById('notes-crochet');
+            if (notesCrochet) {
+                notesCrochet.placeholder = 'ניתן לבחור גם בצבעים שונים מהדגמים המוצעים ולרשום אותם כאן :)';
+            }
+        }
+
+        function sendOrderToWhatsapp() {
+            let message = '';
+            if (currentCustomCategory === 'crochet') {
+                const selectedSize = document.getElementById('size-select').value;
+                const shippingMethod = document.getElementById('shipping-method-crochet').value;
+                const notes = document.getElementById('notes-crochet').value.trim();
+
+                let orderTypeStr = '';
+                if (selectedModel) {
+                    orderTypeStr = selectedModel;
+                } else if (crochetDesignMode === 'custom') {
+                    orderTypeStr = 'בהתאמה אישית מלאה';
+                } else {
+                    orderTypeStr = 'תבנית מובנית';
+                }
+
+                message = `היי, אשמח להזמין כיפה סרוגה בעבודת יד! 🧶\n\n`;
+                message += `*סוג הכיפה:* ${selectedKippahStyle}\n`;
+                message += `*סוג ההזמנה:* ${orderTypeStr}\n`;
+                message += `*גודל:* ${selectedSize}\n`;
+
+                if (crochetDesignMode === 'custom' && !selectedModel) {
+                    const cDesc = document.getElementById('crochet-full-custom-desc').value.trim();
+                    if (cDesc) {
+                        message += `*תיאור הכיפה:* ${cDesc}\n`;
+                    }
+                } else if (selectedModel && crochetDesignMode === 'custom') {
+                    // עבור כיפה ייחודית מהקטלוג שנבחרה
+                    const cDesc = document.getElementById('crochet-full-custom-desc').value.trim();
+                    if (cDesc) {
+                        message += `*הערות / דגשים לדגם:* ${cDesc}\n`;
+                    }
+                } else {
+                    message += `*צבע בסיס מרכזי:* ${document.getElementById('main-color').value}\n`;
+                    const sec = document.getElementById('secondary-color').value;
+                    if (sec) message += `*צבע נוסף:* ${sec}\n`;
+                    message += `*צבע שוליים/מסגרת:* ${document.getElementById('border-color').value}\n`;
+                }
+
+                message += `*אופן אספקה:* ${shippingMethod}\n`;
+                if (notes) message += `*הערות:* ${notes}\n`;
+                message += `\nנשמח לתאם ולסגור פרטים! 😊`;
+            } else {
+                message = `היי, אשמח להזמין יצירת אומנות מעץ זית! 🌿🪵\n\n`;
+                message += `*סוג היצירה:* ${selectedModel ? selectedModel : document.getElementById('wood-type-select').value}\n`;
+                message += `*קוטר/גודל עץ:* ${document.getElementById('wood-diameter-select').value}\n`;
+                message += `*צבע הכיתוב:* ${document.getElementById('wood-text-color').value}\n`;
+                message += `*עיטורים:* ${document.getElementById('wood-decorations').value}\n`;
+                const cText = document.getElementById('wood-custom-text').value.trim();
+                if (cText) message += `*טקסט לקישוט:* ${cText}\n`;
+                message += `*אופן אספקה:* ${document.getElementById('shipping-method-wood').value}\n`;
+                const notes = document.getElementById('notes-wood').value.trim();
+                if (notes) message += `*הערות:* ${notes}\n`;
+                message += `\nנשמח לתאם ולסגור פרטים! 😊`;
+            }
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Scroll listener for buttons (Floating WhatsApp appears, Menu button disappears quickly)
+        window.addEventListener('scroll', function() {
+            const floatingBtn = document.getElementById('floating-whatsapp');
+            const menuBtn = document.getElementById('floating-menu-btn');
+
+            if (window.scrollY > 250) {
+                // Show floating WhatsApp
+                floatingBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-5');
+                floatingBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                
+                // Hide top-right menu button quickly
+                menuBtn.classList.add('opacity-0', 'pointer-events-none', '-translate-y-5');
+                menuBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+                // Hide floating WhatsApp
+                floatingBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-5');
+                floatingBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                
+                // Show top-right menu button quickly
+                menuBtn.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-5');
+                menuBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            }
+        });
+
+        function openLightbox(imgUrl) {
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('gallery-lightbox').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('gallery-lightbox').classList.add('hidden');
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchSiteData();
+        });
+    </script>
+</body>
+</html>
